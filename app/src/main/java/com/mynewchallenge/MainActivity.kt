@@ -1,6 +1,8 @@
 package com.mynewchallenge
 
 import android.os.Bundle
+import android.util.Base64
+import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
@@ -22,15 +24,20 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.focusModifier
 import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
+import androidx.lifecycle.viewModelScope
 import com.mynewchallenge.data.model.User
+import com.mynewchallenge.data.model.UserSearch
 import com.mynewchallenge.data.serviceState.ResultTypes
 import com.mynewchallenge.presentation.viewmodel.UserViewModel
 import com.mynewchallenge.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     val mainViewmodel: UserViewModel by viewModels()
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
@@ -50,12 +57,17 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(modifier: Modifier = Modifier, viewModel: UserViewModel = hiltViewModel()) {
-
+    lateinit var username: String
+    lateinit var pass: String
+    lateinit var base64Auth: String
     val userState by viewModel.userState.collectAsState()
+    val searchState by viewModel.userSearch.collectAsState()
+
 
     LaunchedEffect(Unit) {
         viewModel.getAllUsers()
     }
+
 
     when (userState) {
         is ResultTypes.Loading -> {
@@ -74,8 +86,13 @@ fun Greeting(modifier: Modifier = Modifier, viewModel: UserViewModel = hiltViewM
                         modifier = modifier
                             .background(Color.Green)
                     )
+
+                    LaunchedEffect(Unit) {
+                        viewModel.getSearchUser("scerdan")
+                    }
                 }
             }
+
         }
 
         is ResultTypes.Error -> {
@@ -102,5 +119,18 @@ fun Greeting(modifier: Modifier = Modifier, viewModel: UserViewModel = hiltViewM
         null -> {
             Text(text = "Fetching users...", modifier = modifier)
         }
+    }
+
+    when (searchState) {
+        is ResultTypes.Error -> {
+        Log.e("ERROR", (searchState as ResultTypes.Error).exception.message.toString())
+        }
+        is ResultTypes.HttpError -> {}
+        is ResultTypes.IOError -> {}
+        is ResultTypes.Loading -> {}
+        is ResultTypes.Success -> {
+            (searchState as ResultTypes.Success<UserSearch>).data?.let { Log.e("TAG", it.html_url) }
+        }
+        null -> {}
     }
 }
