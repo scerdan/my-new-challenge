@@ -10,6 +10,6 @@ class AuthInterceptor : Interceptor {
             .addHeader("AuthToken", "Auth-Key")
             .build()
 
-        return chain.proceed(request = request)
+        return chain.proceed(request)
     }
 }
