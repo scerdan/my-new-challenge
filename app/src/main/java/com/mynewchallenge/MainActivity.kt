@@ -4,7 +4,12 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
+import androidx.compose.foundation.background
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
@@ -12,11 +17,11 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.tooling.preview.Preview
-import androidx.fragment.app.viewModels
+import androidx.compose.ui.focus.focusModifier
+import androidx.compose.ui.graphics.Color
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.lifecycleScope
 import com.mynewchallenge.data.model.User
 import com.mynewchallenge.data.serviceState.ResultTypes
 import com.mynewchallenge.presentation.viewmodel.UserViewModel
@@ -48,7 +53,6 @@ fun Greeting(modifier: Modifier = Modifier, viewModel: UserViewModel = hiltViewM
 
     val userState by viewModel.userState.collectAsState()
 
-    // Llama a getAllUsers solo una vez al inicio
     LaunchedEffect(Unit) {
         viewModel.getAllUsers()
     }
@@ -59,12 +63,18 @@ fun Greeting(modifier: Modifier = Modifier, viewModel: UserViewModel = hiltViewM
         }
 
         is ResultTypes.Success -> {
-            val users = (userState as ResultTypes.Success<List<User>>).data
-            if (!users.isNullOrEmpty()) {
-                // Si hay usuarios, muestra el primero (como ejemplo)
-                Text(text = "Hello ${users[0].name}!", modifier = modifier)
-            } else {
-                Text(text = "No users found", modifier = modifier)
+            val result = (userState as ResultTypes.Success<User>).data
+            result?.forEach { item ->
+                Row(
+                    modifier = Modifier
+                        .fillMaxWidth(1f)
+                ) {
+                    Text(
+                        text = item.login,
+                        modifier = modifier
+                            .background(Color.Green)
+                    )
+                }
             }
         }
 

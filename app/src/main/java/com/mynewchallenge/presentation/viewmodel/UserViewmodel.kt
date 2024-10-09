@@ -17,8 +17,8 @@ constructor(
     private val getUserUseCase: GetUserUseCase
 ) : ViewModel() {
 
-    private val _userState = MutableStateFlow<ResultTypes<List<User>>?>(null)
-    val userState: StateFlow<ResultTypes<List<User>>?> = _userState
+    private val _userState = MutableStateFlow<ResultTypes<User>?>(null)
+    val userState: StateFlow<ResultTypes<User>?> = _userState
 
     fun getAllUsers() {
         viewModelScope.launch {

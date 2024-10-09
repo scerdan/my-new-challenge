@@ -1,7 +1,6 @@
 package com.mynewchallenge.domain.usecases
 
 import com.mynewchallenge.data.model.User
-import com.mynewchallenge.data.repository.UserRepository
 import com.mynewchallenge.data.service.GithubApiService
 import com.mynewchallenge.data.serviceState.ResultTypes
 import kotlinx.coroutines.flow.Flow
@@ -12,7 +11,7 @@ import javax.inject.Inject
 
 class GetUserUseCase @Inject constructor(private val apiService: GithubApiService) {
 
-    operator fun invoke(): Flow<ResultTypes<List<User>>?> = flow {
+    operator fun invoke(): Flow<ResultTypes<User>?> = flow {
         try {
             emit(ResultTypes.Loading)
 
