@@ -58,3 +58,4 @@ support-annotations = { group = "com.android.support", name = "support-annotatio
 androidApplication = { id = "com.android.application", version.ref = "agp" }
 jetbrainsKotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
 
+

@@ -15,17 +15,11 @@ object NetworkModule {
 
     @Provides
     @Singleton
-    fun provideRetrofit(): Retrofit {
-        return Retrofit.Builder()
+    fun provideRetrofitInstance(): GithubApiService =
+        Retrofit.Builder()
             .baseUrl("https://api.github.com/")
             .addConverterFactory(GsonConverterFactory.create())
             .build()
-    }
+            .create(GithubApiService::class.java)
 
-
-    @Provides
-    @Singleton
-    fun provideGithubApiService(retrofit: Retrofit): GithubApiService {
-        return retrofit.create(GithubApiService::class.java)
-    }
 }
