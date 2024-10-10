@@ -15,8 +15,6 @@ import javax.inject.Singleton
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
     private fun getToken(): String {
-        // Supongamos que aquí recuperas el token almacenado
-        // Puedes reemplazar esto con SharedPreferences o cualquier método para obtener el token
         return ""
     }
 
@@ -25,8 +23,6 @@ object NetworkModule {
     fun provideAuthInterceptor(): Interceptor {
         return Interceptor { chain ->
             val originalRequest = chain.request()
-
-            // Agregamos el encabezado Authorization solo si hay un token disponible
             val token = getToken()
             val newRequest = originalRequest.newBuilder()
                 .header("Authorization", "Bearer $token")
@@ -40,7 +36,7 @@ object NetworkModule {
     @Singleton
     fun provideOkHttpClient(authInterceptor: Interceptor): OkHttpClient {
         return OkHttpClient.Builder()
-            .addInterceptor(authInterceptor) // Agregamos el interceptor aquí
+            .addInterceptor(authInterceptor)
             .build()
     }
 
@@ -49,7 +45,7 @@ object NetworkModule {
     fun provideRetrofitInstance(okHttpClient: OkHttpClient): GithubApiService =
         Retrofit.Builder()
             .baseUrl("https://api.github.com/")
-            .client(okHttpClient) // Usamos el OkHttpClient con el interceptor
+            .client(okHttpClient)
             .addConverterFactory(GsonConverterFactory.create())
             .build()
             .create(GithubApiService::class.java)

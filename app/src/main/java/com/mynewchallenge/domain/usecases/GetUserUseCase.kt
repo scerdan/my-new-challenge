@@ -14,7 +14,6 @@ class GetUserUseCase @Inject constructor(private val apiService: GithubApiServic
     operator fun invoke(): Flow<ResultTypes<User>?> = flow {
         try {
             emit(ResultTypes.Loading)
-
             val userResult = apiService.getAllUsers()
             emit(ResultTypes.Success(userResult))
 
@@ -22,7 +21,8 @@ class GetUserUseCase @Inject constructor(private val apiService: GithubApiServic
             emit(ResultTypes.HttpError(e))
         } catch (e: IOException) {
             emit(ResultTypes.IOError(e))
-        } catch (e: HttpException) {
+        } catch (e: Error) {
+            emit(ResultTypes.Error(e))
         }
     }
 }

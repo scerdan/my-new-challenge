@@ -1,49 +1,45 @@
 package com.mynewchallenge
 
 import android.os.Bundle
-import android.util.Base64
 import android.util.Log
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.viewModels
-import androidx.compose.foundation.background
-import androidx.compose.foundation.layout.Arrangement
-import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
-import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.text.KeyboardActions
+import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
-import androidx.compose.ui.Alignment
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
-import androidx.compose.ui.focus.focusModifier
-import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.text.input.ImeAction
+import androidx.compose.ui.unit.dp
 import androidx.hilt.navigation.compose.hiltViewModel
-import androidx.lifecycle.viewModelScope
 import com.mynewchallenge.data.model.User
 import com.mynewchallenge.data.model.UserSearch
 import com.mynewchallenge.data.serviceState.ResultTypes
+import com.mynewchallenge.presentation.view.HomeScreen
 import com.mynewchallenge.presentation.viewmodel.UserViewModel
 import com.mynewchallenge.ui.theme.MyApplicationTheme
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class MainActivity : ComponentActivity() {
-    val mainViewmodel: UserViewModel by viewModels()
-
-
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContent {
 
             MyApplicationTheme {
-                // A surface container using the 'background' color from the theme
                 Surface(
                     modifier = Modifier.fillMaxSize(),
                     color = MaterialTheme.colorScheme.background
@@ -57,17 +53,11 @@ class MainActivity : ComponentActivity() {
 
 @Composable
 fun Greeting(modifier: Modifier = Modifier, viewModel: UserViewModel = hiltViewModel()) {
-    lateinit var username: String
-    lateinit var pass: String
-    lateinit var base64Auth: String
     val userState by viewModel.userState.collectAsState()
-    val searchState by viewModel.userSearch.collectAsState()
-
 
     LaunchedEffect(Unit) {
         viewModel.getAllUsers()
     }
-
 
     when (userState) {
         is ResultTypes.Loading -> {
@@ -76,23 +66,7 @@ fun Greeting(modifier: Modifier = Modifier, viewModel: UserViewModel = hiltViewM
 
         is ResultTypes.Success -> {
             val result = (userState as ResultTypes.Success<User>).data
-            result?.forEach { item ->
-                Row(
-                    modifier = Modifier
-                        .fillMaxWidth(1f)
-                ) {
-                    Text(
-                        text = item.login,
-                        modifier = modifier
-                            .background(Color.Green)
-                    )
-
-                    LaunchedEffect(Unit) {
-                        viewModel.getSearchUser("scerdan")
-                    }
-                }
-            }
-
+            HomeScreen(result)
         }
 
         is ResultTypes.Error -> {
@@ -119,18 +93,5 @@ fun Greeting(modifier: Modifier = Modifier, viewModel: UserViewModel = hiltViewM
         null -> {
             Text(text = "Fetching users...", modifier = modifier)
         }
-    }
-
-    when (searchState) {
-        is ResultTypes.Error -> {
-        Log.e("ERROR", (searchState as ResultTypes.Error).exception.message.toString())
-        }
-        is ResultTypes.HttpError -> {}
-        is ResultTypes.IOError -> {}
-        is ResultTypes.Loading -> {}
-        is ResultTypes.Success -> {
-            (searchState as ResultTypes.Success<UserSearch>).data?.let { Log.e("TAG", it.html_url) }
-        }
-        null -> {}
     }
 }
