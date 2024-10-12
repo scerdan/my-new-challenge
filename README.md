@@ -44,8 +44,31 @@ Otherwise you will navigate to the generic error screen where you can paste your
 - **Gradle 8.x**.
 
 ## Project Setup
-### Main Dependencies
 
+### Architecture Overview
+
+![architecture]([figure](https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure1.png)
+
+- Each layer follows [unidirectional event/data flow](https://developer.android.com/topic/architecture/ui-layer#udf); the UI layer emits user events to the data layer, and the data layer exposes data as a stream to other layers.
+- The data layer is designed to work independently from other layers and must be pure, which means it doesn't have any dependencies on the other layers.
+
+With this loosely coupled architecture, you can increase the reusability of components and scalability of your app.
+
+### UI Layer
+
+![architecture]([figure](https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure2.png)
+
+The UI layer consists of UI elements to configure screens that could interact with users and [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) that holds app states and restores data when configuration changes.
+- UI elements observe the data flow via [DataBinding](https://developer.android.com/topic/libraries/data-binding), which is the most essential part of the MVVM architecture. 
+- With [Bindables](https://github.com/skydoves/bindables), which is an Android DataBinding kit for notifying data changes, you can implement two-way binding, and data observation in XML very clean.
+
+### Data Layer
+
+![architecture]([figure](https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure3.png)
+
+The data Layer consists of repositories, which include business logic, such as querying data from the local database and requesting remote data from the network. It is implemented as an offline-first source of business logic and follows the [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth) principle.<br>
+
+### Main Dependencies
 This project uses the following key dependencies:
 
 - **Jetpack Compose**: For declarative user interfaces.
