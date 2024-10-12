@@ -1,10 +1,15 @@
 package com.mynewchallenge.di
 
+import androidx.datastore.core.DataStore
+import androidx.datastore.preferences.core.Preferences
 import com.mynewchallenge.data.service.GithubApiService
+import com.mynewchallenge.domain.repository.TokenRepository
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
+import kotlinx.coroutines.flow.first
+import kotlinx.coroutines.runBlocking
 import okhttp3.Interceptor
 import okhttp3.OkHttpClient
 import retrofit2.Retrofit
@@ -14,16 +19,18 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 object NetworkModule {
-    private fun getToken(): String {
-        return ""
+    @Provides
+    @Singleton
+    fun provideTokenRepository(dataStore: DataStore<Preferences>): TokenRepository {
+        return TokenRepository(dataStore)
     }
 
     @Provides
     @Singleton
-    fun provideAuthInterceptor(): Interceptor {
+    fun provideAuthInterceptor(tokenRepository: TokenRepository): Interceptor {
         return Interceptor { chain ->
             val originalRequest = chain.request()
-            val token = getToken()
+            val token = runBlocking { tokenRepository.token.first() }
             val newRequest = originalRequest.newBuilder()
                 .header("Authorization", "Bearer $token")
                 .build()
