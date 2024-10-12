@@ -11,6 +11,12 @@ This project is an Android application written in **Kotlin** using **Jetpack Com
 - **Datastore** for user preference storage.
 - **Coil** for efficient image loading.
 
+## Screenshots
+
+| Splash Screen | Home Screen | Detail Screen |
+-------------------|-------------------|----------------
+|![Splash Screen](https://github.com/scerdan/my-new-challenge/blob/master/pictures/checkin.png) | ![Home Screen](https://github.com/scerdan/my-new-challenge/blob/master/pictures/home.png) | ![EDetail Screen](https://github.com/scerdan/my-new-challenge/blob/master/pictures/detail.png) |
+
 ## Requirements
 
 - **Android Studio Giraffe (Canary or later)**.
