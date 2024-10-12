@@ -166,7 +166,7 @@ fun DetailScreen(navController: NavHostController, viewModel: UserViewModel, use
                 )
                 Text(
                     text = data?.blog.toString(),
-                    fontSize = 12.sp,
+                    fontSize = 13.sp,
                     fontWeight = FontWeight.Light
                 )
             }
@@ -180,7 +180,7 @@ fun DetailScreen(navController: NavHostController, viewModel: UserViewModel, use
 fun CircularBlueBox(icon: Int, title: String, data: Int) {
     Column(
         modifier = Modifier
-            .padding(vertical = 15.dp),
+            .padding(vertical = 10.dp),
         horizontalAlignment = Alignment.CenterHorizontally,
         verticalArrangement = Arrangement.SpaceBetween
     ) {

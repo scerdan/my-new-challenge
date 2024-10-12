@@ -1,5 +1,7 @@
 package com.mynewchallenge.presentation.view
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -24,8 +26,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.max
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
 import androidx.navigation.NavHostController
@@ -37,6 +43,7 @@ import com.mynewchallenge.presentation.navigation.Screens
 import com.mynewchallenge.presentation.navigation.goTo
 import com.mynewchallenge.presentation.viewmodel.UserViewModel
 import com.mynewchallenge.ui.theme.ColorBackground
+import com.mynewchallenge.ui.theme.ColorPrimary
 
 @Composable
 fun HomeScreen(navController: NavHostController, viewModel: UserViewModel = hiltViewModel()) {
@@ -74,6 +81,8 @@ fun HomeScreen(navController: NavHostController, viewModel: UserViewModel = hilt
 
 @Composable
 fun UserItem(user: UserItem, onClick: () -> Unit) {
+    val context = LocalContext.current
+
     ElevatedCard(
         modifier = Modifier
             .fillMaxWidth()
@@ -106,8 +115,22 @@ fun UserItem(user: UserItem, onClick: () -> Unit) {
             Column(
                 verticalArrangement = Arrangement.SpaceAround
             ) {
-                Text(text = user.login, color = Color.Black, fontWeight = FontWeight.Bold)
-                Text(text = user.repos_url, color = Color(0xFFEB6427), fontSize = 11.sp)
+                Text(
+                    text = user.login,
+                    color = Color.Black,
+                    fontWeight = FontWeight.Bold
+                )
+                Text(
+                    text = user.repos_url,
+                    color = ColorPrimary,
+                    fontSize = 11.sp,
+                    textDecoration = TextDecoration.Underline,
+                    maxLines = 1,
+                    modifier = Modifier.clickable {
+                        val intent = Intent(Intent.ACTION_VIEW, Uri.parse(user.html_url))
+                        context.startActivity(intent)
+                    }
+                )
             }
         }
     }
