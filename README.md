@@ -11,6 +11,20 @@ This project is an Android application written in **Kotlin** using **Jetpack Com
 - **Datastore** for user preference storage.
 - **Coil** for efficient image loading.
 
+## Screenshots
+
+| Splash Screen | Home Screen | Detail Screen |
+|-------------------|-------------------|----------------|
+| <img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/checkin.png" width="250"/> | <img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/home.png" width="250"/> | <img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/detail.png" width="250"/> |
+
+## 🔻Important data to use the app‼️
+In order to use the app, you will require a personal access token.  
+You can create it by logging into GitHub and accessing:  
+[https://github.com/settings/personal-access-tokens/](https://github.com/settings/personal-access-tokens/)
+
+Otherwise you will navigate to the generic error screen where you can paste your access token and try to login again.
+<img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/checkin.png" width="250"/>
+
 ## Requirements
 
 - **Android Studio Giraffe (Canary or later)**.
