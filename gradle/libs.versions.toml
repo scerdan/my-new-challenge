@@ -1,7 +1,9 @@
 [versions]
 accompanistPager = "0.20.0"
 agp = "8.3.0"
+coilCompose = "2.4.0"
 converterGson = "2.9.0"
+datastorePreferences = "1.1.1"
 hiltAndroidVersion = "2.49"
 hiltNavigationCompose = "1.2.0"
 kotlin = "1.8.0"
@@ -13,8 +15,11 @@ lifecycleRuntimeKtx = "2.7.0"
 activityCompose = "1.9.0"
 composeBom = "2023.08.00"
 lifecycleViewmodelKtx = "2.4.0"
+lottie = "5.0.3"
+lottieCompose = "5.0.3"
 material = "1.6.7"
 materialVersion = "1.6.5"
+navigationCompose = "2.8.2"
 playServicesAds = "23.0.0"
 retrofitVersion = "2.9.0"
 hiltAndroid = "2.44"
@@ -33,15 +38,18 @@ firebaseAuth = "23.0.0"
 [libraries]
 accompanist-pager = { module = "com.google.accompanist:accompanist-pager", version.ref = "accompanistPager" }
 androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "coreKtx" }
+androidx-datastore-preferences = { module = "androidx.datastore:datastore-preferences", version.ref = "datastorePreferences" }
 androidx-hilt-compiler = { module = "androidx.hilt:hilt-compiler", version.ref = "hiltNavigationCompose" }
 androidx-hilt-navigation-compose = { module = "androidx.hilt:hilt-navigation-compose", version.ref = "hiltNavigationCompose" }
 androidx-lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleRuntimeKtx" }
 androidx-lifecycle-viewmodel-ktx = { module = "androidx.lifecycle:lifecycle-viewmodel-ktx", version.ref = "lifecycleViewmodelKtx" }
 androidx-material = { module = "androidx.compose.material:material", version.ref = "material" }
 androidx-material-v165 = { module = "androidx.compose.material:material", version.ref = "materialVersion" }
+androidx-navigation-compose = { module = "androidx.navigation:navigation-compose", version.ref = "navigationCompose" }
 androidx-room-compiler = { module = "androidx.room:room-compiler", version.ref = "roomKtx" }
 androidx-room-ktx = { module = "androidx.room:room-ktx", version.ref = "roomKtx" }
 androidx-ui-viewbinding = { module = "androidx.compose.ui:ui-viewbinding", version.ref = "uiViewbinding" }
+coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
 converter-gson = { module = "com.squareup.retrofit2:converter-gson", version.ref = "converterGson" }
 hilt-android-v249 = { module = "com.google.dagger:hilt-android", version.ref = "hiltAndroidVersion" }
 junit = { group = "junit", name = "junit", version.ref = "junit" }
@@ -57,6 +65,8 @@ androidx-ui-tooling-preview = { group = "androidx.compose.ui", name = "ui-toolin
 androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
 androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
 androidx-material3 = { group = "androidx.compose.material3", name = "material3" }
+lottie = { module = "com.airbnb.android:lottie", version.ref = "lottie" }
+lottie-compose = { module = "com.airbnb.android:lottie-compose", version.ref = "lottieCompose" }
 play-services-ads = { module = "com.google.android.gms:play-services-ads", version.ref = "playServicesAds" }
 retrofit2-retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofitVersion" }
 hilt-android = { group = "com.google.dagger", name = "hilt-android", version.ref = "hiltAndroid" }
