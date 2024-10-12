@@ -6,15 +6,15 @@ import java.io.IOException
 /**
  * Sealed class representing the result of an operation, which can be one of the following types:
  *
- * @param T The type of data expected in a successful operation.
+ * @param T The type of FollowingData expected in a successful operation.
  */
 sealed class ResultTypes<out T> {
 
     /**
      * Represents a successful result of the operation.
      *
-     * @param T The type of data returned in case of success.
-     * @property data The data obtained from the successful operation. Can be null.
+     * @param T The type of FollowingData returned in case of success.
+     * @property data The FollowingData obtained from the successful operation. Can be null.
      */
     data class Success<out T>(val data: T?) : ResultTypes<T>()
 
@@ -46,7 +46,7 @@ sealed class ResultTypes<out T> {
      * @property exception The exception that describes the error. Can be any type of exception.
      *
      * This type of error captures any other exceptions that are not specifically
-     * an IOException or HttpException. This can include programming errors, data conversion issues,
+     * an IOException or HttpException. This can include programming errors, FollowingData conversion issues,
      * unexpected errors, etc.
      */
     data class Error(val exception: Throwable) : ResultTypes<Nothing>()

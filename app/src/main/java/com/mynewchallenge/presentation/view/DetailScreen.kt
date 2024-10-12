@@ -26,6 +26,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
 import coil.compose.AsyncImage
 import com.mynewchallenge.data.model.UserSearch
@@ -35,11 +36,13 @@ import com.mynewchallenge.presentation.viewmodel.UserViewModel
 @Composable
 fun DetailScreen(navController: NavHostController, viewModel: UserViewModel, userId: String?) {
     val searchState by viewModel.userSearch.collectAsState()
-
+    val followersCount by viewModel.followersCount.collectAsState()
+    val followingCount by viewModel.followingCount.collectAsState()
 
     LaunchedEffect(Unit) {
         if (userId != null) {
             viewModel.getSearchUser(userId)
+            viewModel.fetchFollowersAndFollowing(userId)
         }
     }
 
@@ -99,21 +102,55 @@ fun DetailScreen(navController: NavHostController, viewModel: UserViewModel, use
                         horizontalArrangement = Arrangement.SpaceAround
                     ) {
                         Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = "100+", style = MaterialTheme.typography.titleMedium)
-                            Text(text = "Follower", style = MaterialTheme.typography.bodyMedium)
-                        }
-                        Column(horizontalAlignment = Alignment.CenterHorizontally) {
-                            Text(text = "10+", style = MaterialTheme.typography.titleMedium)
-                            Text(text = "Following", style = MaterialTheme.typography.bodyMedium)
-                        }
-                    }
+                            // Mostrar el conteo de seguidores
+                            when (val result = followersCount) {
+                                is ResultTypes.Success -> {
+                                    Text(
+                                        text = "Followers: ${result.data}",
+                                        fontSize = 18.sp,
+                                        modifier = Modifier.padding(bottom = 8.dp)
+                                    )
+                                }
 
-                    // Enlace al blog
-                    Text(
-                        text = "Blog\n${data?.blog}",
-                        style = MaterialTheme.typography.bodyMedium,
-                        modifier = Modifier.padding(vertical = 16.dp)
-                    )
+                                is ResultTypes.Loading -> {
+                                    Text(text = "Loading followers...")
+                                }
+
+                                else -> {}
+                            }
+
+                            // Mostrar el conteo de seguidos
+                            when (val result = followingCount) {
+                                is ResultTypes.Success -> {
+                                    Text(
+                                        text = "Following: ${result.data}",
+                                        fontSize = 18.sp
+                                    )
+                                }
+
+                                is ResultTypes.Loading -> {
+                                    Text(text = "Loading following...")
+                                }
+
+                                else -> {}
+
+                            }
+                            Column(horizontalAlignment = Alignment.CenterHorizontally) {
+                                Text(text = "10+", style = MaterialTheme.typography.titleMedium)
+                                Text(
+                                    text = "Following",
+                                    style = MaterialTheme.typography.bodyMedium
+                                )
+                            }
+                        }
+
+                        // Enlace al blog
+                        Text(
+                            text = "Blog\n${data?.blog}",
+                            style = MaterialTheme.typography.bodyMedium,
+                            modifier = Modifier.padding(vertical = 16.dp)
+                        )
+                    }
                 }
             }
         }
