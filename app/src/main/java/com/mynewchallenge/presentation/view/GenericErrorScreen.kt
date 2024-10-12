@@ -1,7 +1,10 @@
 package com.mynewchallenge.presentation.view
 
+import android.content.Intent
+import android.net.Uri
 import androidx.compose.foundation.Image
 import androidx.compose.foundation.background
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -31,6 +34,7 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.font.FontFamily
 import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.navigation.NavHostController
@@ -40,6 +44,7 @@ import com.mynewchallenge.domain.repository.dataStore
 import com.mynewchallenge.presentation.navigation.Screens
 import com.mynewchallenge.presentation.navigation.goTo
 import com.mynewchallenge.presentation.viewmodel.UserViewModel
+import com.mynewchallenge.ui.theme.ColorPrimary
 
 @Composable
 fun GenericErrorScreen(
@@ -50,6 +55,7 @@ fun GenericErrorScreen(
     val tokenRepository = TokenRepository(context.dataStore)
     var token by remember { mutableStateOf("") }
     var isTokenSaved by remember { mutableStateOf(false) }
+    val url = "https://github.com/settings/personal-access-tokens/"
 
     LaunchedEffect(isTokenSaved) {
         if (isTokenSaved) {
@@ -65,7 +71,7 @@ fun GenericErrorScreen(
     ) {
         Text(
             text = "Oh No!",
-            fontSize = 30.sp,
+            fontSize = 24.sp,
             fontWeight = FontWeight.ExtraBold,
             fontFamily = FontFamily.SansSerif
         )
@@ -84,9 +90,20 @@ fun GenericErrorScreen(
         }
 
         Text(
-            text = "Parece que algo ha fallado",
-            fontSize = 18.sp,
+            text = "Something seems to have gone wrong",
+            fontSize = 16.sp, // Ajustado
             fontFamily = FontFamily.SansSerif
+        )
+        Text(
+            text = "Create new Access Token",
+            fontFamily = FontFamily.SansSerif,
+            fontSize = 14.sp,
+            color = ColorPrimary,
+            textDecoration = TextDecoration.Underline,
+            modifier = Modifier.clickable {
+                val intent = Intent(Intent.ACTION_VIEW, Uri.parse(url))
+                context.startActivity(intent)
+            }
         )
         Spacer(modifier = Modifier.height(30.dp))
 
@@ -102,7 +119,7 @@ fun GenericErrorScreen(
                 isTokenSaved = true
             }
         ) {
-            Text("Save Access Token")
+            Text("Enter", fontSize = 16.sp)
         }
     }
 }
@@ -119,8 +136,15 @@ fun tokenInputField(
         onValueChange = {
             onTokenChanged(it)
         },
-        label = { Text("Enter Access Token") },
-        modifier = Modifier.fillMaxWidth()
+        label = {
+            Text(
+                "Paste Access Token",
+                fontWeight = FontWeight.Light,
+                fontSize = 14.sp
+            )
+        },
+        modifier = Modifier
+            .fillMaxWidth()
             .background(Color.White)
             .padding(horizontal = 20.dp),
         trailingIcon = {
@@ -140,3 +164,4 @@ fun tokenInputField(
         }
     )
 }
+
