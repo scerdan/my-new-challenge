@@ -23,7 +23,8 @@ You can create it by logging into GitHub and accessing:
 [https://github.com/settings/personal-access-tokens/](https://github.com/settings/personal-access-tokens/)
 
 Otherwise you will navigate to the generic error screen where you can paste your access token and try to login again.
-<img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/checkin.png" width="250"/>
+
+<img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/pasteToken.png" width="300"/>
 
 ## Requirements
 
