@@ -31,6 +31,7 @@ import com.mynewchallenge.presentation.navigation.goTo
 import com.mynewchallenge.presentation.viewmodel.UserViewModel
 import com.mynewchallenge.ui.theme.ColorBlack
 import com.mynewchallenge.ui.theme.ColorPrimary
+import com.mynewchallenge.utils.LoadComponent
 import kotlinx.coroutines.delay
 
 @Composable
@@ -78,11 +79,7 @@ fun LoadingScreen(navController: NavHostController, viewModel: UserViewModel) {
             fontFamily = FontFamily.SansSerif,
             fontWeight = FontWeight.Light
         )
-        CircularProgressIndicator(
-            color = ColorBlack,
-            modifier = Modifier
-                .padding(top = 20.dp)
-        )
+        LoadComponent()
     }
 
 }
