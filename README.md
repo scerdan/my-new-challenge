@@ -1,4 +1,4 @@
-# MyNewChallenge App
+# My GitHub Users App
 
 This project is an Android application written in **Kotlin** using **Jetpack Compose** as the primary tool for the user interface. It is designed to manage and display GitHub users with additional functionalities, such as using an API to retrieve follower and following user information.
 
@@ -17,6 +17,17 @@ This project is an Android application written in **Kotlin** using **Jetpack Com
 |-------------------|-------------------|----------------|
 | <img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/checkin.png" width="250"/> | <img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/home.png" width="250"/> | <img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/detail.png" width="250"/> |
 
+## Installation
+Follow these steps to clone the project and set up dependencies:
+
+1. Clone this repository:
+    ```bash
+    git clone https://github.com/scerdan/my-new-challenge.git
+    ```
+2. Open the project in **Android Studio**.
+3. Sync the project to install the dependencies.
+4. Run
+
 ## 🔻Important data to use the app‼️
 In order to use the app, you will require a personal access token.  
 You can create it by logging into GitHub and accessing:  
@@ -33,7 +44,6 @@ Otherwise you will navigate to the generic error screen where you can paste your
 - **Gradle 8.x**.
 
 ## Installation
-
 Follow these steps to clone the project and set up dependencies:
 
 1. Clone this repository:
@@ -64,3 +74,9 @@ retrofitVersion = "2.9.0"
 composeBom = "2023.08.00"
 coilCompose = "2.4.0"
 # And more...
+```
+## Optimizations
+What optimizations did you make in your code?
+
+
+
