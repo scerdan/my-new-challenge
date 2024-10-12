@@ -43,11 +43,9 @@ Otherwise you will navigate to the generic error screen where you can paste your
 - **Java 11** or higher.
 - **Gradle 8.x**.
 
-## Project Setup
-
-### Architecture Overview
-
-![architecture]([figure](https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure1.png)
+## Architecture Overview
+### MVVM:
+<img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure0.png" width="500"/>
 
 - Each layer follows [unidirectional event/data flow](https://developer.android.com/topic/architecture/ui-layer#udf); the UI layer emits user events to the data layer, and the data layer exposes data as a stream to other layers.
 - The data layer is designed to work independently from other layers and must be pure, which means it doesn't have any dependencies on the other layers.
@@ -56,7 +54,7 @@ With this loosely coupled architecture, you can increase the reusability of comp
 
 ### UI Layer
 
-![architecture]([figure](https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure2.png)
+<img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure2.png" width="500"/>
 
 The UI layer consists of UI elements to configure screens that could interact with users and [ViewModel](https://developer.android.com/topic/libraries/architecture/viewmodel) that holds app states and restores data when configuration changes.
 - UI elements observe the data flow via [DataBinding](https://developer.android.com/topic/libraries/data-binding), which is the most essential part of the MVVM architecture. 
@@ -64,7 +62,7 @@ The UI layer consists of UI elements to configure screens that could interact wi
 
 ### Data Layer
 
-![architecture]([figure](https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure3.png)
+<img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure3.png" width="500"/>
 
 The data Layer consists of repositories, which include business logic, such as querying data from the local database and requesting remote data from the network. It is implemented as an offline-first source of business logic and follows the [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth) principle.<br>
 
