@@ -14,8 +14,8 @@ This project is an Android application written in **Kotlin** using **Jetpack Com
 ## Screenshots
 
 | Splash Screen | Home Screen | Detail Screen |
--------------------|-------------------|----------------
-|![Splash Screen](https://github.com/scerdan/my-new-challenge/blob/master/pictures/checkin.png) | ![Home Screen](https://github.com/scerdan/my-new-challenge/blob/master/pictures/home.png) | ![EDetail Screen](https://github.com/scerdan/my-new-challenge/blob/master/pictures/detail.png) |
+|-------------------|-------------------|----------------|
+| <img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/checkin.png" width="250"/> | <img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/home.png" width="250"/> | <img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/detail.png" width="250"/> |
 
 ## Requirements
 
