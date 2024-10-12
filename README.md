@@ -43,18 +43,7 @@ Otherwise you will navigate to the generic error screen where you can paste your
 - **Java 11** or higher.
 - **Gradle 8.x**.
 
-## Installation
-Follow these steps to clone the project and set up dependencies:
-
-1. Clone this repository:
-    ```bash
-    git clone https://github.com/yourusername/MyNewChallenge.git
-    ```
-2. Open the project in **Android Studio**.
-3. Sync the project to install the dependencies.
-
 ## Project Setup
-
 ### Main Dependencies
 
 This project uses the following key dependencies:
@@ -76,7 +65,47 @@ coilCompose = "2.4.0"
 # And more...
 ```
 ## Optimizations
-What optimizations did you make in your code?
+What could we optimize in this project?
+A lot of things!
+For starters, it was done in a few days, so it has a lot of room for optimization. Next I'll go on to optimize some of the edges that we could attack in future features.
 
+
+### UI:
+Starting from the most generic to the most particular. As far as the UI is concerned, we have no clear theme and no dark theme. And we are also using a very small color palette.
+
+```kotlin
+val ColorPrimary = Color(0xFF568FA6)
+val ColorSecondary = Color(0xFFA7DDF2)
+val ColorBackground = Color(0xFFF2F2F2)
+val ColorBlack = Color(0xFF0D0D0D)
+```
+### Testing:
+We can also include everything that is testing since it has not been developed.
+Although we already have the following tools in the project:
+
+- JUnit 4:
+```gradle
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+```
+
+- JUnit para AndroidX:
+```gradle
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+```
+
+- Espresso:
+```gradle
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+```
+
+- Compose UI Test (JUnit4):
+```gradle
+androidx-ui-test-junit4 = { group = "androidx.compose.ui", name = "ui-test-junit4" }
+```
+
+- Compose UI Test Manifest:
+```gradle
+androidx-ui-test-manifest = { group = "androidx.compose.ui", name = "ui-test-manifest" }
+```
 
 
