@@ -91,7 +91,7 @@ fun GenericErrorScreen(
 
         Text(
             text = "Something seems to have gone wrong",
-            fontSize = 16.sp, // Ajustado
+            fontSize = 16.sp,
             fontFamily = FontFamily.SansSerif
         )
         Text(
