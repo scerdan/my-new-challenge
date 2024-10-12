@@ -6,7 +6,7 @@ import com.mynewchallenge.data.model.User
 import com.mynewchallenge.data.model.UserSearch
 import com.mynewchallenge.data.serviceState.ResultTypes
 import com.mynewchallenge.domain.repository.TokenRepository
-import com.mynewchallenge.domain.usecases.GetUserSearch
+import com.mynewchallenge.domain.usecases.UserSearchUseCase
 import com.mynewchallenge.domain.usecases.GetUserUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.*
@@ -18,7 +18,7 @@ class UserViewModel
 @Inject
 constructor(
     private val getUserUseCase: GetUserUseCase,
-    private val getUserSearch: GetUserSearch,
+    private val userSearchUseCase: UserSearchUseCase,
     private val tokenRepository: TokenRepository
 ) : ViewModel() {
 
@@ -27,6 +27,12 @@ constructor(
 
     private val _userSearch = MutableStateFlow<ResultTypes<UserSearch>?>(ResultTypes.Loading)
     val userSearch: StateFlow<ResultTypes<UserSearch>?> = _userSearch
+
+    private val _followersCount = MutableStateFlow<Int>()
+    val followersCount: StateFlow<Int> get() = _followersCount
+
+    private val _followingCount = MutableStateFlow<Int>()
+    val followingCount: StateFlow<Int> get() = _followingCount
 
     init {
         viewModelScope.launch {
@@ -50,7 +56,7 @@ constructor(
 
     fun getSearchUser(userData: String) {
         viewModelScope.launch {
-            getUserSearch(userData).collect { result ->
+            userSearchUseCase(userData).collect { result ->
                 _userSearch.value = result
             }
         }

@@ -24,6 +24,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import androidx.hilt.navigation.compose.hiltViewModel
@@ -35,6 +36,7 @@ import com.mynewchallenge.data.serviceState.ResultTypes
 import com.mynewchallenge.presentation.navigation.Screens
 import com.mynewchallenge.presentation.navigation.goTo
 import com.mynewchallenge.presentation.viewmodel.UserViewModel
+import com.mynewchallenge.ui.theme.ColorBackground
 
 @Composable
 fun HomeScreen(navController: NavHostController, viewModel: UserViewModel = hiltViewModel()) {
@@ -55,7 +57,12 @@ fun HomeScreen(navController: NavHostController, viewModel: UserViewModel = hilt
                     UserItem(
                         user = user,
                         onClick = {
-                            goTo(Screens.DETAIL_SCREEN.route, navController, false, userId = user.login)
+                            goTo(
+                                Screens.DETAIL_SCREEN.route,
+                                navController,
+                                false,
+                                userId = user.login
+                            )
                         }
                     )
                 }
@@ -74,10 +81,11 @@ fun UserItem(user: UserItem, onClick: () -> Unit) {
             .clickable { onClick() },
         shape = RoundedCornerShape(8.dp),
         colors = CardDefaults.cardColors(
-            containerColor = Color(0xFFF0DDA6)
-        ),
+            containerColor = ColorBackground,
+
+            ),
         elevation = CardDefaults.cardElevation(
-            defaultElevation = 6.dp
+            defaultElevation = 8.dp
         )
     ) {
         Row(
@@ -98,7 +106,7 @@ fun UserItem(user: UserItem, onClick: () -> Unit) {
             Column(
                 verticalArrangement = Arrangement.SpaceAround
             ) {
-                Text(text = user.login, color = Color.Black)
+                Text(text = user.login, color = Color.Black, fontWeight = FontWeight.Bold)
                 Text(text = user.repos_url, color = Color(0xFFEB6427), fontSize = 11.sp)
             }
         }

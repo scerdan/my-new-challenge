@@ -13,4 +13,10 @@ interface GithubApiService {
     suspend fun getUserSearch(
         @Path("userName") userName: String,
     ): UserSearch
+
+    @GET("users/{username}/followers")
+    suspend fun getFollowers(@Path("username") username: String): List<User>
+
+    @GET("users/{username}/following")
+    suspend fun getFollowing(@Path("username") username: String): List<User>
 }

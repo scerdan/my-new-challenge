@@ -9,7 +9,7 @@ import retrofit2.HttpException
 import java.io.IOException
 import javax.inject.Inject
 
-class GetUserSearch @Inject constructor(private val apiService: GithubApiService) {
+class UserSearchUseCase @Inject constructor(private val apiService: GithubApiService) {
     operator fun invoke(search: String): Flow<ResultTypes<UserSearch>?> = flow {
         try {
             emit(ResultTypes.Loading)
