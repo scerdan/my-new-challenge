@@ -43,9 +43,13 @@ Otherwise you will navigate to the generic error screen where you can paste your
 - **Java 11** or higher.
 - **Gradle 8.x**.
 
-## Architecture Overview
-### MVVM:
+## Architecture MVVM
 <img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure0.png" width="500"/>
+
+- This app is based on the MVVM architecture and the Repository pattern, which follows the [Google's official architecture guidance](https://developer.android.com/topic/architecture).
+
+### Architecture Overview
+<img src="https://github.com/scerdan/my-new-challenge/blob/master/pictures/figure1.png" width="500"/>
 
 - Each layer follows [unidirectional event/data flow](https://developer.android.com/topic/architecture/ui-layer#udf); the UI layer emits user events to the data layer, and the data layer exposes data as a stream to other layers.
 - The data layer is designed to work independently from other layers and must be pure, which means it doesn't have any dependencies on the other layers.
