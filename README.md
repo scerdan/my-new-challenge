@@ -70,7 +70,29 @@ The UI layer consists of UI elements to configure screens that could interact wi
 
 The data Layer consists of repositories, which include business logic, such as querying data from the local database and requesting remote data from the network. It is implemented as an offline-first source of business logic and follows the [single source of truth](https://en.wikipedia.org/wiki/Single_source_of_truth) principle.<br>
 
-### Main Dependencies
+
+## GitHub API Integration
+
+This project integrates the GitHub API to retrieve user data, such as followers, following details, and profile information. The following API endpoints are used:
+
+```gradle
+GET https://api.github.com/users?per_page=20&page=1
+Fetches a paginated list of users.
+
+GET https://api.github.com/users/{login_username}
+Retrieves detailed information about a specific user.
+
+GET https://api.github.com/users/{login_username}/followers
+Gets a list of followers for a specific user.
+
+GET https://api.github.com/users/{login_username}/following{/other_user}
+Retrieves the users a specific user is following.
+```
+These endpoints allow for dynamic interaction with GitHub's user data, enabling real-time updates in the application.
+
+For more information, visit the official [GitHub API documentation](https://docs.github.com/en/rest).
+
+## Main Dependencies
 This project uses the following key dependencies:
 
 - **Jetpack Compose**: For declarative user interfaces.
